@@ -37,13 +37,7 @@ void Graphics::clear() {
     return;
 }
 
-void Graphics::writeFile(string filename) const {
-
-    // Implement this
-
-    return;
-}
-
+//Need to fix: setPixel
 void Graphics::setPixel(int x, int y, Color color) {
     
     pixelData[x][y] = color;

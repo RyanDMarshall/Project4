@@ -69,6 +69,7 @@ int Color::getBlue() {
     return blue;
 }
 
+//Need to fix: Read and write
 void Color::read(istream& ins) {
 
     char format;

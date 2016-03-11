@@ -13,8 +13,6 @@
 #include "Line.h"
 #include "Graphics.h"
 
-// TODO: implement two Line constructors, setStart, getStart, setEnd, 
-//       getEnd, setColor, getColor, read, write.
 
 Line::Line() {
 
@@ -66,18 +64,19 @@ Color Line::getColor() {
     return lineColor;
 }
 
+//Need to fix: read & write
 void Line::read(istream& ins) {
 
     char format;
 
-    cin >> start >> format >> format >> end >> format >> format >> lineColor;
+    ins >> start >> format >> format >> end >> format >> format >> lineColor;
     
     return;
 }
 
 void Line::write(ostream& outs) {
 
-    cout << start << "  " << end << "  " << lineColor;
+    outs << start << "  " << end << "  " << lineColor;
 
     return;
 }

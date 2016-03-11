@@ -20,6 +20,72 @@ using namespace std;
 // TODO: implement two constructors, setCenter, getCenter, setColor, getColor,
 //       setRadius, getRadius, read, write.
 
+Circle::Circle() {
+
+    return;
+}
+
+Circle::Circle(Point pt, int r, Color c) {
+
+    center = pt;
+    radius = checkRadius(r);
+    color = c;
+
+    return;    
+}
+
+void Circle::setCenter(Point pt) {
+
+    center = pt;
+
+    return;
+}
+
+Point Circle::getCenter() {
+
+    return center;
+}
+
+void Circle::setRadius(int r) {
+
+    radius = r;
+
+    return;
+}
+
+int Circle::getRadius() {
+
+    return checkRadius(radius);
+}
+
+void Circle::setColor(Color c) {
+
+    color = c;
+
+    return;
+}
+
+Color Circle::getColor() {
+
+    return color;
+}
+
+//Need to fix: read & write
+void Circle::read(istream& ins) {
+    
+    char format;
+
+    ins >> center >> format >> radius >> format >> color;
+
+    return;
+}
+
+void Circle::write(ostream& outs) {
+
+    outs << center << ' ' << radius << ' ' << color;
+
+    return;
+}
 
 
 // Your code goes above this line.

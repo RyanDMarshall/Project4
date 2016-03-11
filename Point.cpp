@@ -13,8 +13,6 @@
 #include "Point.h"
 #include "utility.h"
 
-// TODO: implement two constructors, setX, getX, setY, getY, read, write.
-
 Point::Point() {
     
     x = 0;
@@ -33,7 +31,7 @@ Point::Point(int xVal, int yVal) {
 
 void Point::setX(int xVal) {
     
-    x = xVal;
+    x = checkRange(xVal);
 
     return;
 }
@@ -45,7 +43,7 @@ int Point::getX() {
 
 void Point::setY(int yVal) {
     
-    y = yVal;
+    y = checkRange(yVal);
 
     return;
 }
@@ -66,7 +64,10 @@ void Point::read(istream& ins) {
 
 void Point::write(ostream& outs) {
     
-    cout <<'(' << x << ',' << y << ')';
+    x = checkRange(x);
+    y = checkRange(y);
+
+    outs <<'(' << x << ',' << y << ')';
 
     return;
 }

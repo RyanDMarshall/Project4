@@ -17,12 +17,137 @@
 #include <algorithm>
 using namespace std;
 
-// TODO: implement three constructors, setStart, getStart, setEnd, getEnd,
-//       setColor, setColorTopLeft, getColorTopLeft, setColorTopRight,
-//       getColorTopRight, setColorBottomRight, getColorBottomRight,
-//       setColorBottomLeft, getColorBottomLeft, read, write.
+Rectangle::Rectangle() {
 
+    return;
+}
 
+Rectangle::Rectangle(Point pt1, Point pt2, Color color) {
+
+    start = pt1;
+    end = pt2;
+    colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+
+    return;
+}
+
+Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
+                     Color cBottomRight, Color cBottomLeft) {
+
+    start = pt1;
+    end = pt2;
+    
+    colorTopLeft = cTopLeft;
+    colorTopRight = cTopRight;
+    colorBottomLeft = cBottomLeft;
+    colorBottomRight = cBottomRight;
+
+    return;
+}
+
+void Rectangle::setStart(Point pt) {
+
+    start = pt;
+
+    return;
+}
+
+Point Rectangle::getStart() {
+
+    return start;
+}
+
+void Rectangle::setEnd(Point pt) {
+
+    end = pt;
+
+    return;
+}
+
+Point Rectangle::getEnd() {
+
+    return end;
+}
+
+void Rectangle::setColor(Color colar) {
+
+    colorTopLeft = colorTopRight = colorBottomRight = colorBottomLeft = colar;
+
+    return;
+}
+
+void Rectangle::setColorTopLeft(Color color) {
+
+    colorTopLeft = color;
+
+    return;
+}
+
+Color Rectangle::getColorTopLeft() {
+
+    return colorTopLeft;
+}
+
+void Rectangle::setColorTopRight(Color color) {
+    
+    colorTopRight = color;
+
+    return;
+}
+
+Color Rectangle::getColorTopRight() {
+
+    return colorTopRight;
+}
+
+void Rectangle::setColorBottomRight(Color color) {
+
+    colorBottomRight = color;
+
+    return;
+}
+
+Color Rectangle::getColorBottomRight() {
+
+    return colorBottomRight;
+}
+
+void Rectangle::setColorBottomLeft(Color c) {
+
+    colorBottomLeft = c;
+
+    return;
+}
+
+Color Rectangle::getColorBottomLeft() {
+
+    return colorBottomLeft;
+}
+
+/**
+* Requires: ins is in good state.
+* Modifies: ins, start, end, colorTopLeft, colorTopRight,
+*           colorBottomRight, colorBottomLeft.
+* Effects:  Reads rectangle in forms
+*           start end color
+*           start end cTopLeft cTopRight cBottomRight cBottomLeft
+*/
+
+//Need to fix: read
+void Rectangle::read(istream& ins) {
+
+    //ins >>
+
+    return;
+}
+
+void Rectangle::write(ostream& outs) {
+
+    outs << start << ' ' << end << ' ' << colorTopLeft << ' ' 
+         << colorTopRight << ' ' << colorBottomRight << ' ' << colorBottomLeft;
+
+    return;
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!

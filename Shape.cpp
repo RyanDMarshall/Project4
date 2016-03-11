@@ -14,5 +14,5 @@
 
 void Shape::draw(Graphics &drawer)
 {
+    
 }
-

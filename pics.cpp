@@ -45,8 +45,6 @@ void printCloser();
  */
 void printMenu();
 
-//_______________________________________________________________________________________
-
 /**
  * Requires: ins is in good state.
  * Modifies: cin, ins.
@@ -56,13 +54,14 @@ void printMenu();
  */
 string openFile(ifstream& ins);
 
+//Need to fix: towlower, loadFile, writeFile
+
 /**
  * Requires: Nothing.
  * Modifies: Nothing.
  * Effects:  Returns str with all of its alphabetical characters lowercased.
  */
 string tolower(string str);
-
 
 /**
  * Requires: Nothing.
@@ -164,7 +163,6 @@ void printMenu()
          << "write filename      Creates a bmp image from data" << endl
          << "quit                Quits the program" << endl << endl;
 }
-
 
 void printOpener()
 {

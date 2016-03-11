@@ -30,127 +30,121 @@ Triangle::Triangle() {
 
 Triangle::Triangle(Point pt1, Point pt2, Point pt3, Color color) {
 
-    
+    vertexOne = pt1;
+    vertexTwo = pt2;
+    vertexThree = pt3;
+    vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+
+    return;
 }
 
-/**
-* Requires: nothing
-* Modifies: vertexOne, vertexTwo, vertexThree,
-*           vertexOneColor, vertexTwoColor, vertexThreeColor.
-* Effects:  Overloaded constructor. Sets three vertices and three colors.
-*/
-Triangle(Point pt1, Color color1,
+Triangle::Triangle(Point pt1, Color color1,
     Point pt2, Color color2,
-    Point pt3, Color color3);
+    Point pt3, Color color3) {
 
-/**
-* Requires: Nothing.
-* Modifies: vertexOneColor, vertexTwoColor, vertexThreeColor.
-* Effects:  Sets all three colors of triangle.
-*/
-void setColor(Color color);
+    vertexOne = pt1;
+    vertexTwo = pt2;
+    vertexThree = pt3;
+    vertexOneColor = color1;
+    vertexTwoColor = color2; 
+    vertexThreeColor = color3;
 
-/**
-* Requires: Nothing.
-* Modifies: vertexOne.
-* Effects:  Sets vertex one of triangle.
-*/
-void setVertexOne(Point pt);
+    return;
+}
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns vertex one of triangle.
-*/
-Point getVertexOne();
+void Triangle::setColor(Color color) {
 
-/**
-* Requires: Nothing.
-* Modifies: vertexOneColor.
-* Effects:  Sets color of vertex one of triangle.
-*/
-void setVertexOneColor(Color color);
+    vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+    
+    return;
+}
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns color of vertex one of triangle.
-*/
-Color getVertexOneColor();
+void Triangle::setVertexOne(Point pt) {
 
-/**
-* Requires: Nothing.
-* Modifies: vertexTwo.
-* Effects:  Sets vertex two of triangle.
-*/
-void setVertexTwo(Point pt);
+    vertexOne = pt;
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns vertex two of triangle.
-*/
-Point getVertexTwo();
+    return;
+}
 
-/**
-* Requires: Nothing.
-* Modifies: vertexTwoColor.
-* Effects:  Sets color of vertex two of triangle.
-*/
-void setVertexTwoColor(Color color);
+Point Triangle::getVertexOne() {
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns color of vertex two of triangle.
-*/
-Color getVertexTwoColor();
+    return vertexOne;
+}
 
-/**
-* Requires: Nothing.
-* Modifies: vertexThree.
-* Effects:  Sets vertex three of triangle.
-*/
-void setVertexThree(Point pt);
+void Triangle::setVertexOneColor(Color color) {
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns vertex three of triangle.
-*/
-Point getVertexThree();
+    vertexOneColor = color;
 
-/**
-* Requires: Nothing.
-* Modifies: vertexThreeColor.
-* Effects:  Sets color of vertex three of triangle.
-*/
-void setVertexThreeColor(Color color);
+    return;
+}
 
-/**
-* Requires: Nothing.
-* Modifies: Nothing.
-* Effects:  Returns color of vertex three of triangle.
-*/
-Color getVertexThreeColor();
+Color Triangle::getVertexOneColor() {
 
-/**
-* Requires: ins is in good state.
-* Modifies: ins, vertexOne, vertexTwo, vertexThree,
-*           vertexOneColor, vertexTwoColor, vertexThreeColor.
-* Effects:  Reads triangle in forms
-*           v1 v2 v3 color
-*           v1 v1Color v2 v2Color v3 v3Color
-*/
-void read(istream& ins);
+    return vertexOneColor;
+}
 
-/**
-* Requires: outs is in good state.
-* Modifies: outs.
-* Effects:  Writes triangle in form
-*           v1 v1Color v2 v2Color v3 v3Color
-*/
-void write(ostream& outs);
+void Triangle::setVertexTwo(Point pt) {
+
+    vertexTwo = pt;
+
+    return;
+}
+
+Point Triangle::getVertexTwo() {
+
+    return vertexTwo;
+}
+
+void Triangle::setVertexTwoColor(Color color) {
+
+    vertexTwoColor = color;
+}
+
+Color Triangle::getVertexTwoColor() {
+
+    return vertexTwoColor;
+}
+
+void Triangle::setVertexThree(Point pt) {
+
+    vertexThree = pt;
+
+    return;
+}
+
+Point Triangle::getVertexThree() {
+
+    return vertexThree;
+}
+
+void Triangle::setVertexThreeColor(Color color) {
+
+    vertexThreeColor = color;
+
+    return;
+}
+
+Color Triangle::getVertexThreeColor() {
+
+    return vertexThreeColor;
+}
+
+//Still have to implement this
+void Triangle::read(istream& ins) {
+
+    //ins >> 
+
+    return;
+}
+
+void Triangle::write(ostream& outs) {
+
+    outs << vertexOne << ' ' << vertexOneColor << ' ' 
+         << vertexTwo << ' ' << vertexTwoColor << ' ' 
+         << vertexThree << ' ' << vertexThreeColor;
+
+    return;
+}
 
 // Your code goes above this line.
 // Don't change the implementations below!
