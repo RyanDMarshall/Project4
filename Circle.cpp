@@ -75,7 +75,7 @@ void Circle::read(istream& ins) {
     
     char format;
 
-    ins >> center >> format >> radius >> format >> color;
+    ins >> center >> radius >> color;
 
     return;
 }

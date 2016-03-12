@@ -69,14 +69,14 @@ void Line::read(istream& ins) {
 
     char format;
 
-    ins >> start >> format >> format >> end >> format >> format >> lineColor;
+    ins >> start >> end >> lineColor;
     
     return;
 }
 
 void Line::write(ostream& outs) {
 
-    outs << start << "  " << end << "  " << lineColor;
+    outs << start << ' ' << end << ' ' << lineColor;
 
     return;
 }

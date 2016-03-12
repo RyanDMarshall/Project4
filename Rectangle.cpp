@@ -124,20 +124,24 @@ Color Rectangle::getColorBottomLeft() {
     return colorBottomLeft;
 }
 
-/**
-* Requires: ins is in good state.
-* Modifies: ins, start, end, colorTopLeft, colorTopRight,
-*           colorBottomRight, colorBottomLeft.
-* Effects:  Reads rectangle in forms
-*           start end color
-*           start end cTopLeft cTopRight cBottomRight cBottomLeft
-*/
-
 //Need to fix: read
 void Rectangle::read(istream& ins) {
 
-    //ins >>
+    Color color;
 
+    ins >> start >> end >> color;
+    
+    //Checks the remaining number of character in the ins stream
+    if (ins.rdbuf()->in_avail() != 0) {
+    
+        colorTopLeft = color;
+
+        ins >> colorTopRight >> colorBottomRight >> colorBottomLeft;
+    }
+    else {
+        colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+    }
+    
     return;
 }
 

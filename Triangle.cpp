@@ -129,10 +129,29 @@ Color Triangle::getVertexThreeColor() {
     return vertexThreeColor;
 }
 
-//Still have to implement this
 void Triangle::read(istream& ins) {
+    
+    ins >> vertexOne;
 
-    //ins >> 
+    char firstChar2 = ' ';
+    firstChar2 = ins.peek();
+
+    bool isPoint = false;
+
+    if (firstChar2 == '(') {
+        isPoint = true;
+    }
+
+    if (isPoint) {
+        Color color;
+        ins >> vertexTwo >> vertexThree >> color;
+
+        vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+    }
+    else {
+        ins >> vertexOneColor >> vertexTwo >> vertexTwoColor 
+            >> vertexThree >> vertexThreeColor;
+    }
 
     return;
 }

@@ -74,17 +74,14 @@ void Color::read(istream& ins) {
 
     char format;
 
-    cin >> format >> format >> red >> 
-           format >> format >> blue >> 
-           format >> format >> green >>
-           format;
+    cin >> red >> blue >> green;
 
     return;
 }
 
 void Color::write(ostream& outs) {
 
-    cout << "  " << red << "  " << blue << "  " << green << "  ";
+    cout << ' ' << red << ' ' << blue << ' ' << green << ' ';
     
     return;
 }
@@ -115,4 +112,3 @@ ostream& operator << (ostream& outs, Color color)
    color.write(outs);
    return outs;
 }
-
