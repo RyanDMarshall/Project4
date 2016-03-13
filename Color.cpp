@@ -72,16 +72,14 @@ int Color::getBlue() {
 //Need to fix: Read and write
 void Color::read(istream& ins) {
 
-    char format;
-
-    cin >> red >> blue >> green;
+    ins >> red >> blue >> green;
 
     return;
 }
 
 void Color::write(ostream& outs) {
 
-    cout << ' ' << red << ' ' << blue << ' ' << green << ' ';
+    outs << ' ' << red << ' ' << blue << ' ' << green << ' ';
     
     return;
 }

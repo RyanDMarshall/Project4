@@ -78,7 +78,7 @@ public:
      * Modifies: colorTopLeft, colorTopRight, colorBottomRight, colorBottomLeft.
      * Effects:  Sets the four colors of rectangle to color.
      */
-    void setColor(Color colar);
+    void setColor(Color color);
     
     /**
      * Requires: Nothing.

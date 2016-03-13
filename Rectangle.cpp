@@ -69,9 +69,9 @@ Point Rectangle::getEnd() {
     return end;
 }
 
-void Rectangle::setColor(Color colar) {
+void Rectangle::setColor(Color color) {
 
-    colorTopLeft = colorTopRight = colorBottomRight = colorBottomLeft = colar;
+    colorTopLeft = colorTopRight = colorBottomRight = colorBottomLeft = color;
 
     return;
 }
@@ -131,7 +131,7 @@ void Rectangle::read(istream& ins) {
 
     ins >> start >> end >> color;
     
-    //Checks the remaining number of character in the ins stream
+    //Checks the remaining number of characters in the ins stream
     if (ins.rdbuf()->in_avail() != 0) {
     
         colorTopLeft = color;

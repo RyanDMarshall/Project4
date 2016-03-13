@@ -40,7 +40,9 @@ void Graphics::clear() {
 //Need to fix: setPixel
 void Graphics::setPixel(int x, int y, Color color) {
     
-    pixelData[x][y] = color;
+    if ((x >= 0 && x < 100 ) && (y >= 0 && y < 100)) {
+        pixelData[x][y] = color;
+    }
     
     return;
 }

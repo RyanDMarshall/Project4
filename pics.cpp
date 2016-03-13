@@ -16,13 +16,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-using namespace std;
-
+#include <cctype>
 #include "Line.h"
 #include "Triangle.h"
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Graphics.h"
+
+using namespace std;
+
 
 /**
  * Requires: Nothing.
@@ -54,7 +56,7 @@ void printMenu();
  */
 string openFile(ifstream& ins);
 
-//Need to fix: towlower, loadFile, writeFile
+//Need to fix: tolower, loadFile, writeFile
 
 /**
  * Requires: Nothing.
@@ -130,23 +132,101 @@ int main()
     }
 
     printCloser();
+
+    return 0;
 }
 
+//Need to fix: loadFile
 void writeFile(const Graphics& drawer)
 {
-    // TODO: implement
-    // This will make use of Graphics::writeFile()
+    string fileName = "";
+
+    cin >> fileName;
+
+    fileName = fileName + ".bmp";
+    
+    drawer.writeFile(fileName);
+
+    cout << "[Wrote " << fileName << ']' << endl;
 }
 
+/**
+* Requires: Nothing.
+* Modifies: cin, drawer.
+* Effects:
+*     Opens a file
+*     Start with a blank canvas (drawer)
+*     Start reading from file.  For each line....
+*        Read the 1st character to determine shape
+*        Read the shape:  L reads a line, C reads a circle, T read a triangle
+*            R reads a rectangle.
+*            For any other character, clears drawer and prints
+*            "Error in input file: " << [character already read]
+*            << [all chars remaining on the line] << endl;
+*        Draw shape on canvas
+*     Close file
+*     Print "[Loaded filename]"
+*/
 void loadFile(Graphics& drawer)
 {
-    // TODO: implement
+    ifstream input_file;
+
+    string fileName = openFile(input_file);
+
+    drawer.clear();
+
+    //Initializes so that the loop will run at least once
+    int charactersLeft = 1;
+
+    while (charactersLeft != 0) {
+        
+        string fullLine = "";
+        char firstChar;
+
+        input_file >> firstChar;
+        getline(input_file, fullLine);
+    
+        Line line;
+        Circle circle;
+        Triangle triangle;
+        Rectangle rectangle;
+
+        switch (firstChar) {
+            case 'L':
+                cout << "Test Line" << endl;
+                line.draw(drawer);
+                break;
+            case 'C':
+                cout << "Test Circle" << endl;
+                circle.draw(drawer);
+                break;
+            case 'T':
+                cout << "Test Triangle" << endl;
+                triangle.draw(drawer);
+                break;
+            case 'R':
+                cout << "Test Rectangle" << endl;
+                rectangle.draw(drawer);
+                break;
+            default:
+                cout << "Error in input file: " << firstChar << fullLine << endl;
+                break;
+        }
+
+        charactersLeft = input_file.rdbuf()->in_avail();
+    }
+
+    cout << endl;
+
+    input_file.close();
+
+    cout << "[Loaded " << fileName << ']' << endl << endl;
 }
 
 string tolower(string str)
 {
     for (int i = 0; i < str.length(); i++) {
-        tolower(str.at(i));
+        str.at(i) = tolower(str.at(i));
     }
 
     return str;
