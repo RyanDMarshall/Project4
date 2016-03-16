@@ -64,7 +64,6 @@ Color Line::getColor() {
     return lineColor;
 }
 
-//Need to fix: read & write
 void Line::read(istream& ins) {
 
     char format;

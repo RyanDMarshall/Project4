@@ -17,19 +17,13 @@
 #include <cmath>
 using namespace std;
 
-// TODO: implement three constructors, setColor, setVertexOne, getVertexOne,
-//       setVertexTwo, getVertexTwo, setVertexThree, getVertexThree,
-//       setVertexOneColor, getVertexOneColor, setVertexTwoColor,
-//       getVertexTwoColor, setVertexThreeColor, getVertexThreeColor,
-//       read, write.
-
 Triangle::Triangle() {
     
     return;
 }
 
 Triangle::Triangle(Point pt1, Point pt2, Point pt3, Color color) {
-
+    
     vertexOne = pt1;
     vertexTwo = pt2;
     vertexThree = pt3;
@@ -131,27 +125,27 @@ Color Triangle::getVertexThreeColor() {
 
 void Triangle::read(istream& ins) {
     
-    ins >> vertexOne;
+    ins >> vertexOne >> vertexOneColor;
 
-    char firstChar2 = ' ';
-    firstChar2 = ins.peek();
+    if (ins.fail()) {
 
-    bool isPoint = false;
+        ins.clear();
 
-    if (firstChar2 == '(') {
-        isPoint = true;
-    }
-
-    if (isPoint) {
         Color color;
-        ins >> vertexTwo >> vertexThree >> color;
 
+        ins >> vertexTwo >> vertexThree >> color;
         vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+
     }
     else {
-        ins >> vertexOneColor >> vertexTwo >> vertexTwoColor 
-            >> vertexThree >> vertexThreeColor;
+
+        ins >> vertexTwo >> vertexTwoColor >> vertexThree >> vertexThreeColor;
+
     }
+
+    //Delete this
+    //cout << vertexOne << ' ' << vertexOneColor << ' ' << vertexTwo << ' ' << vertexTwoColor << ' ';
+    //cout << vertexThree << ' ' << vertexThreeColor << endl;
 
     return;
 }

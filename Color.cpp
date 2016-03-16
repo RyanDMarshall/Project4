@@ -12,14 +12,11 @@
 
 #include "Color.h"
 
-// TODO: implement first checkRange, then two constructors, setRed, getRed,
-//       setGreen, getGreen, setBlue, getBlue, read, write.
-
 Color::Color() {
     
     red = 0;
-    blue = 0;
     green = 0;
+    blue = 0;
 
     return;
 }
@@ -27,8 +24,8 @@ Color::Color() {
 Color::Color(int redVal, int greenVal, int blueVal) {
     
     red = checkRange(redVal);
-    blue = checkRange(blueVal);
     green = checkRange(greenVal);
+    blue = checkRange(blueVal);
 
     return;
 }
@@ -69,17 +66,22 @@ int Color::getBlue() {
     return blue;
 }
 
-//Need to fix: Read and write
 void Color::read(istream& ins) {
 
-    ins >> red >> blue >> green;
+    int redColor, blueColor, greenColor;
+
+    ins >> redColor >> greenColor >> blueColor;
+
+    red = checkRange(redColor);
+    green = checkRange(greenColor);
+    blue = checkRange(blueColor);
 
     return;
 }
 
 void Color::write(ostream& outs) {
 
-    outs << ' ' << red << ' ' << blue << ' ' << green << ' ';
+    outs << ' ' << red << ' ' << green << ' ' << blue << ' ';
     
     return;
 }

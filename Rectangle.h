@@ -177,4 +177,3 @@ istream& operator >> (istream& ins, Rectangle& rectangle);
 ostream& operator << (ostream& outs, Rectangle rectangle);
 
 #endif
-

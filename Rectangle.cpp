@@ -124,21 +124,32 @@ Color Rectangle::getColorBottomLeft() {
     return colorBottomLeft;
 }
 
-//Need to fix: read
 void Rectangle::read(istream& ins) {
 
     Color color;
+    Color testColor;
 
     ins >> start >> end >> color;
     
-    //Checks the remaining number of characters in the ins stream
-    if (ins.rdbuf()->in_avail() != 0) {
-    
-        colorTopLeft = color;
+    if (!ins.eof()) {
 
-        ins >> colorTopRight >> colorBottomRight >> colorBottomLeft;
+        ins >> testColor;
+
+        if (ins.fail()) {
+
+            ins.clear();
+
+            colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+        }
+        else {
+
+            colorTopLeft = color;
+            colorTopRight = testColor;
+            ins >> colorBottomRight >> colorBottomLeft;
+        }
     }
     else {
+
         colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
     }
     
@@ -147,8 +158,8 @@ void Rectangle::read(istream& ins) {
 
 void Rectangle::write(ostream& outs) {
 
-    outs << start << ' ' << end << ' ' << colorTopLeft << ' ' 
-         << colorTopRight << ' ' << colorBottomRight << ' ' << colorBottomLeft;
+    outs << start << ' ' << end << ' ' << colorTopLeft << ' ' << 
+            colorTopRight << ' ' << colorBottomRight << ' ' << colorBottomLeft;
 
     return;
 }

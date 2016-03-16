@@ -17,9 +17,6 @@
 #include <algorithm>
 using namespace std;
 
-// TODO: implement two constructors, setCenter, getCenter, setColor, getColor,
-//       setRadius, getRadius, read, write.
-
 Circle::Circle() {
 
     return;

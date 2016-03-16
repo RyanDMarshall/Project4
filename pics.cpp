@@ -25,7 +25,6 @@
 
 using namespace std;
 
-
 /**
  * Requires: Nothing.
  * Modifies: cout.
@@ -55,8 +54,6 @@ void printMenu();
  *           Returns the name of the file that was opened.
  */
 string openFile(ifstream& ins);
-
-//Need to fix: tolower, loadFile, writeFile
 
 /**
  * Requires: Nothing.
@@ -136,7 +133,6 @@ int main()
     return 0;
 }
 
-//Need to fix: loadFile
 void writeFile(const Graphics& drawer)
 {
     string fileName = "";
@@ -150,23 +146,7 @@ void writeFile(const Graphics& drawer)
     cout << "[Wrote " << fileName << ']' << endl;
 }
 
-/**
-* Requires: Nothing.
-* Modifies: cin, drawer.
-* Effects:
-*     Opens a file
-*     Start with a blank canvas (drawer)
-*     Start reading from file.  For each line....
-*        Read the 1st character to determine shape
-*        Read the shape:  L reads a line, C reads a circle, T read a triangle
-*            R reads a rectangle.
-*            For any other character, clears drawer and prints
-*            "Error in input file: " << [character already read]
-*            << [all chars remaining on the line] << endl;
-*        Draw shape on canvas
-*     Close file
-*     Print "[Loaded filename]"
-*/
+
 void loadFile(Graphics& drawer)
 {
     ifstream input_file;
@@ -175,16 +155,12 @@ void loadFile(Graphics& drawer)
 
     drawer.clear();
 
-    //Initializes so that the loop will run at least once
-    int charactersLeft = 1;
-
-    while (charactersLeft != 0) {
+    while (!input_file.eof()) {
         
         string fullLine = "";
         char firstChar;
 
         input_file >> firstChar;
-        getline(input_file, fullLine);
     
         Line line;
         Circle circle;
@@ -193,34 +169,33 @@ void loadFile(Graphics& drawer)
 
         switch (firstChar) {
             case 'L':
-                cout << "Test Line" << endl;
+                line.read(input_file);
                 line.draw(drawer);
                 break;
             case 'C':
-                cout << "Test Circle" << endl;
+                circle.read(input_file);
                 circle.draw(drawer);
                 break;
             case 'T':
-                cout << "Test Triangle" << endl;
+                triangle.read(input_file);
                 triangle.draw(drawer);
                 break;
             case 'R':
-                cout << "Test Rectangle" << endl;
+                rectangle.read(input_file);
                 rectangle.draw(drawer);
                 break;
             default:
+                getline(input_file, fullLine);
                 cout << "Error in input file: " << firstChar << fullLine << endl;
                 break;
         }
-
-        charactersLeft = input_file.rdbuf()->in_avail();
     }
 
     cout << endl;
 
     input_file.close();
 
-    cout << "[Loaded " << fileName << ']' << endl << endl;
+    cout << "[Loaded " << fileName << ']' << endl;
 }
 
 string tolower(string str)
