@@ -143,62 +143,28 @@ void Rectangle::read(istream& ins) {
     Color color;
     Color testColor;
 
+    // Reads in the three correct variables, then tests an extra one.
     ins >> start >> end >> color >> testColor;
 
+    /* If the extra variable sends the input stream into a fail state, then
+     * start, end, and color were sufficient, and so we use the case for the
+     * first non-default constructor. I.e. we clear the stream and set all
+     * corner colors to color. */
     if (ins.fail()) {
         
         ins.clear();
         setColor(color);
     }
+    /* If the input stream does not enter a fail state, then start, end, 
+     * and color were not sufficient, and so we use the case for the second
+     * non-default constructor, set the colors we've read in to their
+     * respective corners, and read in colors to the final two corners. */
     else {
         colorTopLeft = color;
         colorTopRight = testColor;
 
         ins >> colorBottomRight >> colorBottomLeft;
     }
-
-    /*
-    
-    // Reads in the components for the first non-default constructor
-    ins >> start >> end >> color;
-    
-    /* Checks if the ins stream enters a fail state (due to being at the
-     * end of the file). If ins does fail, it means that we have reached 
-     * the end of the file and that the 1st non-default constructor was
-     * used. Thus, sets all corner colors equal to color. If ins does not
-     * fail, it means that we are not at the end of the file. In which case...
-     *  
-    if (!ins.fail()) {
-
-        /* Attempts to read in a color. If that doesn't work, it means 
-         * we've reached the end of a line that is NOT the end of a file,
-         * in which case, start end and color were sufficient conditions 
-         * and we use the first non-default constructor. Then we set all
-         * corner colors equal to color. 
-        ins >> testColor;
-
-        if (ins.fail()) {
-
-            ins.clear();
-
-            setColor(color);
-        }
-        /* If ins does not fail, then we are in the case of the second default
-         * constructor, and so we read in two final color values, and set the
-         * values we've read in to their respective corners.
-        else {
-
-            colorTopLeft = color;
-            colorTopRight = testColor;
-            ins >> colorBottomRight >> colorBottomLeft;
-        }
-    }
-    else {
-
-        setColor(color);
-    }
-    
-*/
     return;
 }
 
