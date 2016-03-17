@@ -143,6 +143,22 @@ void Rectangle::read(istream& ins) {
     Color color;
     Color testColor;
 
+    ins >> start >> end >> color >> testColor;
+
+    if (ins.fail()) {
+        
+        ins.clear();
+        setColor(color);
+    }
+    else {
+        colorTopLeft = color;
+        colorTopRight = testColor;
+
+        ins >> colorBottomRight >> colorBottomLeft;
+    }
+
+    /*
+    
     // Reads in the components for the first non-default constructor
     ins >> start >> end >> color;
     
@@ -151,14 +167,14 @@ void Rectangle::read(istream& ins) {
      * the end of the file and that the 1st non-default constructor was
      * used. Thus, sets all corner colors equal to color. If ins does not
      * fail, it means that we are not at the end of the file. In which case...
-     *  */
+     *  
     if (!ins.fail()) {
 
         /* Attempts to read in a color. If that doesn't work, it means 
          * we've reached the end of a line that is NOT the end of a file,
          * in which case, start end and color were sufficient conditions 
          * and we use the first non-default constructor. Then we set all
-         * corner colors equal to color. */
+         * corner colors equal to color. 
         ins >> testColor;
 
         if (ins.fail()) {
@@ -169,7 +185,7 @@ void Rectangle::read(istream& ins) {
         }
         /* If ins does not fail, then we are in the case of the second default
          * constructor, and so we read in two final color values, and set the
-         * values we've read in to their respective corners.*/
+         * values we've read in to their respective corners.
         else {
 
             colorTopLeft = color;
@@ -182,8 +198,10 @@ void Rectangle::read(istream& ins) {
         setColor(color);
     }
     
+*/
     return;
 }
+
 
 // Writes the rectangle components to output stream.
 void Rectangle::write(ostream& outs) {
