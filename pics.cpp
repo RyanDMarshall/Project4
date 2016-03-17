@@ -10,7 +10,10 @@
  * ryanmars@umich.edu
  * bfreud@umich.edu
  *
- * <#Description#>
+ * This program provides the implementation necessary to draw basic graphical 
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles) 
+ * to a .bmp file. The program will also be able to read in data from .txt 
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include <iostream>
@@ -133,35 +136,42 @@ int main()
     return 0;
 }
 
+/* Reads in a string name, concatenates ".bmp", and draws the file.
+ * Prints which file was written. */
 void writeFile(const Graphics& drawer)
 {
     string fileName = "";
-
     cin >> fileName;
-
     fileName = fileName + ".bmp";
     
     drawer.writeFile(fileName);
-
     cout << "[Wrote " << fileName << ']' << endl;
 }
 
-
+/* Opens a file and checks that the program has access. If so, reads
+ * line by line, drawing the function based on the data in the file. */
 void loadFile(Graphics& drawer)
 {
     ifstream input_file;
 
+    // Declares a string to hold the name of the .txt file loaded.
     string fileName = openFile(input_file);
 
     drawer.clear();
 
-    while (!input_file.eof()) {
-        
-        string fullLine = "";
-        char firstChar;
+    // Declares a variable to which the first character in the file is set.
+    char firstChar;
+    input_file >> firstChar;
 
-        input_file >> firstChar;
-    
+    // Loops until the end of the file is reached, or some other error occurs.
+    while (!input_file.fail()) {
+
+        /* Checks if the first letter of the line is one of the expected:
+         * 'L', 'C', 'T', 'R'. In each of these cases, declares the letter's
+         * respective shape, reads the reaminder of the line, and draws the 
+         * data given. In any other case, prints the line on which the error
+         * occurred. */
+
         Line line;
         Circle circle;
         Triangle triangle;
@@ -185,12 +195,22 @@ void loadFile(Graphics& drawer)
                 rectangle.draw(drawer);
                 break;
             default:
+                input_file.clear();
+                string fullLine = "";
                 getline(input_file, fullLine);
-                cout << "Error in input file: " << firstChar << fullLine << endl;
+                cout << "Error in input file: " << firstChar << fullLine;
+                cout << endl;
                 break;
         }
+    
+        /* At the end of a line, reads in the next character available -
+         * i.e., the first character of the next line. If the character
+         * exists, the loop runs again. If it does not, the loop stops.*/
+        input_file >> firstChar;
     }
 
+    /* Once all data in the file has been read and drawn, closes the file and
+     * prints which file the data was drawn from. */
     cout << endl;
 
     input_file.close();
@@ -200,6 +220,8 @@ void loadFile(Graphics& drawer)
 
 string tolower(string str)
 {
+    /* Loops through each element of a string, setting each to the 
+     * lowercased version of itself. */
     for (int i = 0; i < str.length(); i++) {
         str.at(i) = tolower(str.at(i));
     }

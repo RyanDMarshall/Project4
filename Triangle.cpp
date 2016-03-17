@@ -4,10 +4,16 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
+ * 
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
  *
- * <#Description#>
+ * This program provides the implementation necessary to draw basic graphical 
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles) 
+ * to a .bmp file. The program will also be able to read in data from .txt 
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include "Point.h"
@@ -22,16 +28,19 @@ Triangle::Triangle() {
     return;
 }
 
+// First non-default constructor. Sets all corners equal to color.
 Triangle::Triangle(Point pt1, Point pt2, Point pt3, Color color) {
     
     vertexOne = pt1;
     vertexTwo = pt2;
     vertexThree = pt3;
-    vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+    setColor(color);
 
     return;
 }
 
+/* Second non-default constructor. Individually sets each vertex and its
+ * respective color. */
 Triangle::Triangle(Point pt1, Color color1,
     Point pt2, Color color2,
     Point pt3, Color color3) {
@@ -46,6 +55,10 @@ Triangle::Triangle(Point pt1, Color color1,
     return;
 }
 
+/* All following set and get functions set values to, or get values
+ * from, their respective class data members. */
+
+// Sets all vertex colors to color.
 void Triangle::setColor(Color color) {
 
     vertexOneColor = vertexTwoColor = vertexThreeColor = color;
@@ -123,10 +136,17 @@ Color Triangle::getVertexThreeColor() {
     return vertexThreeColor;
 }
 
+/* Reads in the components of a triangle from the input stream,
+ * determining which constructor to use based on what is inputted. */
 void Triangle::read(istream& ins) {
     
+    // Reads in vertex one, then attempts to read in a color.
     ins >> vertexOne >> vertexOneColor;
 
+    /* If the stream fails, a color was not next on the line. Thus, assuming
+     * the file was properly written, the next object in the stream must be 
+     * a point. So, we use the first non-default constructor, and set all
+     * vertex colors to color. */
     if (ins.fail()) {
 
         ins.clear();
@@ -134,22 +154,22 @@ void Triangle::read(istream& ins) {
         Color color;
 
         ins >> vertexTwo >> vertexThree >> color;
-        vertexOneColor = vertexTwoColor = vertexThreeColor = color;
+        setColor(color);
 
     }
+    /* If the stream does not fail, the color was read in properly, and so we 
+     * continue using the second non-default constructor, reading in individual
+     * values for each vertex and color. */
     else {
 
         ins >> vertexTwo >> vertexTwoColor >> vertexThree >> vertexThreeColor;
 
     }
 
-    //Delete this
-    //cout << vertexOne << ' ' << vertexOneColor << ' ' << vertexTwo << ' ' << vertexTwoColor << ' ';
-    //cout << vertexThree << ' ' << vertexThreeColor << endl;
-
     return;
 }
 
+// Writes the components of a triangle to the output stream.
 void Triangle::write(ostream& outs) {
 
     outs << vertexOne << ' ' << vertexOneColor << ' ' 
@@ -158,9 +178,6 @@ void Triangle::write(ostream& outs) {
 
     return;
 }
-
-// Your code goes above this line.
-// Don't change the implementations below!
 
 istream& operator >> (istream& ins, Triangle& tri)
 {

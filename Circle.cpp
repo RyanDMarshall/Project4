@@ -4,10 +4,16 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
  *
- * <#Description#>
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
+ *
+ * This program provides the implementation necessary to draw basic graphical
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles)
+ * to a .bmp file. The program will also be able to read in data from .txt
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include "Circle.h"
@@ -15,6 +21,7 @@
 #include "Graphics.h"
 #include "utility.h"
 #include <algorithm>
+
 using namespace std;
 
 Circle::Circle() {
@@ -22,6 +29,7 @@ Circle::Circle() {
     return;
 }
 
+// Non-default constructor. Checks to see if radius is positive.
 Circle::Circle(Point pt, int r, Color c) {
 
     center = pt;
@@ -31,6 +39,8 @@ Circle::Circle(Point pt, int r, Color c) {
     return;    
 }
 
+/* All following set and get functions set values to, or get values
+ * from, their respective class data members. */
 void Circle::setCenter(Point pt) {
 
     center = pt;
@@ -43,9 +53,10 @@ Point Circle::getCenter() {
     return center;
 }
 
+// Sets radius to the absolute value of r.
 void Circle::setRadius(int r) {
 
-    radius = r;
+    radius = checkRadius(r);
 
     return;
 }
@@ -67,26 +78,21 @@ Color Circle::getColor() {
     return color;
 }
 
-//Need to fix: read & write
+// Reads in the components of a circle.
 void Circle::read(istream& ins) {
     
-    char format;
-
     ins >> center >> radius >> color;
 
     return;
 }
 
+// Writes the components to the output stream.
 void Circle::write(ostream& outs) {
 
     outs << center << ' ' << radius << ' ' << color;
 
     return;
 }
-
-
-// Your code goes above this line.
-// Don't change the implementations below!
 
 istream& operator >> (istream& ins, Circle& circle)
 {

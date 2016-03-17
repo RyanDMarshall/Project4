@@ -4,10 +4,16 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
  *
- * <#Description#>
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
+ *
+ * This program provides the implementation necessary to draw basic graphical
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles)
+ * to a .bmp file. The program will also be able to read in data from .txt
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include <iostream>
@@ -21,19 +27,15 @@
 
 using namespace std;
 
+// Default constructor. Sets all pixels to black.
 Graphics::Graphics() {
-    
-    Color black = Color(0,0,0);
-    
-    for (int i = 0; i < DIMENSION; i++) {
-        for (int j = 0; j < DIMENSION; j++) {
-            pixelData[i][j] = black;
-        }
-    }
+        
+    initArray();
 
     return;
 }
 
+// Sets all pixels to black.
 void Graphics::clear() {
     
     initArray();
@@ -41,27 +43,31 @@ void Graphics::clear() {
     return;
 }
 
+/* If the pixel accessed is within the appropriate range,
+ * sets the pixel to the color. */
 void Graphics::setPixel(int x, int y, Color color) {
     
-    if ((x >= 0 && x < 100 ) && (y >= 0 && y < 100)) {
+    if (((x >= 0) && (x < DIMENSION)) && 
+        ((y >= 0) && (y < DIMENSION))) {
+        
         pixelData[y][x] = color;
     }
     
     return;
 }
 
+// Sets all pixels to black.
 void Graphics::initArray() {
+
+    Color black(0,0,0);
 
     for (int i = 0; i < DIMENSION; i++) {
         for (int j = 0; j < DIMENSION; j++) {
-            pixelData[i][j] = Color(0,0,0);
+            pixelData[i][j] = black;
         }
     }
     
 }
-
-// Your code goes above this line.
-// Don't change the implementation below!
 
 void Graphics::writeFile(string fileName) const
 {

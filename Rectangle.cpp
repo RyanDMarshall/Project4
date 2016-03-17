@@ -4,10 +4,16 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
  *
- * <#Description#>
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
+ *
+ * This program provides the implementation necessary to draw basic graphical
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles)
+ * to a .bmp file. The program will also be able to read in data from .txt
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include "Rectangle.h"
@@ -17,20 +23,25 @@
 #include <algorithm>
 using namespace std;
 
+// Default costructor. Does nothing; returns nothing.
 Rectangle::Rectangle() {
 
     return;
 }
 
+/* First non-default constructor. Sets the top left point and the bottom 
+ * right point, then sets the colors of each corner (and thus the whole
+ * rectangle) to color. */
 Rectangle::Rectangle(Point pt1, Point pt2, Color color) {
 
     start = pt1;
     end = pt2;
-    colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+    setColor(color);
 
     return;
 }
 
+// Second non-default constructor. Separately sets the colors of all corners.
 Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
                      Color cBottomRight, Color cBottomLeft) {
 
@@ -45,6 +56,8 @@ Rectangle::Rectangle(Point pt1, Point pt2, Color cTopLeft, Color cTopRight,
     return;
 }
 
+/* All following set and get functions set values to, or get values
+ * from, their respective class data members. */
 void Rectangle::setStart(Point pt) {
 
     start = pt;
@@ -69,6 +82,7 @@ Point Rectangle::getEnd() {
     return end;
 }
 
+// Sets all rectangle corners to color.
 void Rectangle::setColor(Color color) {
 
     colorTopLeft = colorTopRight = colorBottomRight = colorBottomLeft = color;
@@ -129,18 +143,33 @@ void Rectangle::read(istream& ins) {
     Color color;
     Color testColor;
 
+    // Reads in the components for the first non-default constructor
     ins >> start >> end >> color;
     
-    if (!ins.eof()) {
+    /* Checks if the ins stream enters a fail state (due to being at the
+     * end of the file). If ins does fail, it means that we have reached 
+     * the end of the file and that the 1st non-default constructor was
+     * used. Thus, sets all corner colors equal to color. If ins does not
+     * fail, it means that we are not at the end of the file. In which case...
+     *  */
+    if (!ins.fail()) {
 
+        /* Attempts to read in a color. If that doesn't work, it means 
+         * we've reached the end of a line that is NOT the end of a file,
+         * in which case, start end and color were sufficient conditions 
+         * and we use the first non-default constructor. Then we set all
+         * corner colors equal to color. */
         ins >> testColor;
 
         if (ins.fail()) {
 
             ins.clear();
 
-            colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+            setColor(color);
         }
+        /* If ins does not fail, then we are in the case of the second default
+         * constructor, and so we read in two final color values, and set the
+         * values we've read in to their respective corners.*/
         else {
 
             colorTopLeft = color;
@@ -150,12 +179,13 @@ void Rectangle::read(istream& ins) {
     }
     else {
 
-        colorTopLeft = colorTopRight = colorBottomLeft = colorBottomRight = color;
+        setColor(color);
     }
     
     return;
 }
 
+// Writes the rectangle components to output stream.
 void Rectangle::write(ostream& outs) {
 
     outs << start << ' ' << end << ' ' << colorTopLeft << ' ' << 
@@ -163,9 +193,6 @@ void Rectangle::write(ostream& outs) {
 
     return;
 }
-
-// Your code goes above this line.
-// Don't change the implementations below!
 
 istream& operator >> (istream& ins, Rectangle& rectangle)
 {

@@ -4,21 +4,27 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
  *
- * <#Description#>
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
+ *
+ * This program provides the implementation necessary to draw basic graphical
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles)
+ * to a .bmp file. The program will also be able to read in data from .txt
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include "Line.h"
 #include "Graphics.h"
-
 
 Line::Line() {
 
     return;
 }
 
+// Sets the beginning and ending points of the line, as well as the color.
 Line::Line(Point pt1, Point pt2, Color color) {
 
     start = pt1;
@@ -28,6 +34,8 @@ Line::Line(Point pt1, Point pt2, Color color) {
     return;
 }
 
+/* All following set and get functions set values to, or get values
+ * from, their respective class data members. */
 void Line::setStart(Point pt) {
 
     start = pt;
@@ -64,6 +72,7 @@ Color Line::getColor() {
     return lineColor;
 }
 
+// Reads in the components of a line
 void Line::read(istream& ins) {
 
     char format;
@@ -73,16 +82,13 @@ void Line::read(istream& ins) {
     return;
 }
 
+// Writes the components of a line to the output stream
 void Line::write(ostream& outs) {
 
     outs << start << ' ' << end << ' ' << lineColor;
 
     return;
 }
-
-
-// Your code goes above this line.
-// Don't change the implementations below!
 
 void Line::draw(Graphics &drawer )
 {

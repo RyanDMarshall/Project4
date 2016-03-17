@@ -4,14 +4,21 @@
  * EECS 183, Winter 2016
  * Project 4: CoolPics
  *
- * <#Name(s)#>
- * <#uniqname(s)#>
+ * Ryan Marshall
+ * Brandon Freudenstein
  *
- * <#Description#>
+ * ryanmars@umich.edu
+ * bfreud@umich.edu
+ *
+ * This program provides the implementation necessary to draw basic graphical
+ * representations of shapes (i.e. circles, lines, triangles, and rectangles)
+ * to a .bmp file. The program will also be able to read in data from .txt
+ * files, which allows for efficient rendering of graphics.
  */
 
 #include "Color.h"
 
+// Default Constructor. Sets all color values to 0.
 Color::Color() {
     
     red = 0;
@@ -21,6 +28,8 @@ Color::Color() {
     return;
 }
 
+/* Non-default constructor. Checks range of values and sets 
+ * them to their respective colors. */
 Color::Color(int redVal, int greenVal, int blueVal) {
     
     red = checkRange(redVal);
@@ -30,6 +39,8 @@ Color::Color(int redVal, int greenVal, int blueVal) {
     return;
 }
 
+/* All following set and get functions set values to, or get values
+ * from, their respective class data members. */
 void Color::setRed(int redVal) {
     
     red = checkRange(redVal);
@@ -66,6 +77,8 @@ int Color::getBlue() {
     return blue;
 }
 
+/* Reads colors into temporary variables, then checks the range of these
+ * and sets those values equal to their respective colors. */
 void Color::read(istream& ins) {
 
     int redColor, blueColor, greenColor;
@@ -79,6 +92,7 @@ void Color::read(istream& ins) {
     return;
 }
 
+// Writes the colors to the output stream
 void Color::write(ostream& outs) {
 
     outs << ' ' << red << ' ' << green << ' ' << blue << ' ';
@@ -86,6 +100,9 @@ void Color::write(ostream& outs) {
     return;
 }
 
+/* Checks that the value for the colors is within the range [0,255].
+ * If the value is negative, returns 0. If it is greater than 255, 
+ * returns 255. */
 int Color::checkRange(int val) {
     if (val < 0) {
         return 0;
@@ -97,9 +114,6 @@ int Color::checkRange(int val) {
         return val;
     }
 }
-
-// Your code goes above this line.
-// Don't change the implementations below!
   
 istream& operator >> (istream& ins, Color& color)
 {

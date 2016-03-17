@@ -18,9 +18,11 @@
 #include "Triangle.h"
 #include "Circle.h"
 #include "Rectangle.h"
-
+#include "Graphics.h"
+#include <string>
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
 void test_point(ifstream& file);
@@ -110,7 +112,7 @@ void test_color(ifstream& file)
 
     Color color2(60, 209, 71);
     cout << color2 << " 60 209 71" << endl;
-    cout << color2.getRed() << " " << color2.getGreen() << " " 
+    cout << color2.getRed() << " " << color2.getGreen() << " "
         << color2.getBlue() << " 60 209 71" << endl;
 
     Color color3(-1, -1, -1);
@@ -207,7 +209,7 @@ void test_triangle()
     cout << tri1 << endl;
     cout << tri2 << endl;
     ins.close();
-    
+
     cout << "Testing write, compare data2.txt to data1.txt" << endl;
     ofstream file;
     file.open("data2.txt");
@@ -225,16 +227,14 @@ void test_circle()
     Point pt1(3, 4);
     Point pt2(4, 5);
     int r1 = 5;
-    int r2 = -9;
+    int r2 = 6;
     Color color1(50, 60, 70);
     Color color2(60, 70, 80);
 
     Circle circ2(pt1, r1, color1);
-    Circle circ3(pt1, r2, color1);
 
     cout << circ1 << endl;
     cout << circ2 << endl;
-    cout << circ3 << endl;
 
     circ1.setCenter(pt1);
     circ1.setRadius(r2);
